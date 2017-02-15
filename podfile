@@ -1,0 +1,12 @@
+platform :ios, '7.0'
+target 'Notebook' do
+pod 'FMDB'
+pod 'DZNEmptyDataSet'
+pod 'SVProgressHUD'
+pod 'MJRefresh'
+pod 'SSKeychain'
+pod 'Masonry'
+pod 'JTCalendar'
+pod 'ChameleonFramework'
+end
+
