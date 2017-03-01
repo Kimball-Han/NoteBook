@@ -34,6 +34,7 @@
 		1D501FF21D3CB341003BD438 /* WordDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D501FF11D3CB341003BD438 /* WordDetailViewController.m */; };
 		1D5C767B1D3F490300406D17 /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D5C767A1D3F490300406D17 /* CalendarViewController.m */; };
 		1D76E30A1D7E9898007AEE97 /* KBWave.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D76E3091D7E9898007AEE97 /* KBWave.m */; };
+		1D8653771E6585F90065534D /* MainNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D8653761E6585F90065534D /* MainNavigationController.m */; };
 		1D87C7CF1CBE246E00738E56 /* AESCrypt.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D87C7C81CBE246E00738E56 /* AESCrypt.m */; };
 		1D87C7D01CBE246E00738E56 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D87C7CA1CBE246E00738E56 /* NSData+Base64.m */; };
 		1D87C7D11CBE246E00738E56 /* NSData+CommonCrypto.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D87C7CC1CBE246E00738E56 /* NSData+CommonCrypto.m */; };
@@ -117,6 +118,8 @@
 		1D5C767A1D3F490300406D17 /* CalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarViewController.m; sourceTree = "<group>"; };
 		1D76E3081D7E9898007AEE97 /* KBWave.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KBWave.h; sourceTree = "<group>"; };
 		1D76E3091D7E9898007AEE97 /* KBWave.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KBWave.m; sourceTree = "<group>"; };
+		1D8653751E6585F90065534D /* MainNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainNavigationController.h; sourceTree = "<group>"; };
+		1D8653761E6585F90065534D /* MainNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainNavigationController.m; sourceTree = "<group>"; };
 		1D87C7C51CBE237F00738E56 /* AppConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppConfig.h; sourceTree = "<group>"; };
 		1D87C7C71CBE246E00738E56 /* AESCrypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AESCrypt.h; sourceTree = "<group>"; };
 		1D87C7C81CBE246E00738E56 /* AESCrypt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AESCrypt.m; sourceTree = "<group>"; };
@@ -196,6 +199,8 @@
 				1D2B654D1CB4F2C500ADEDD8 /* CustomTabBar.m */,
 				1D404E1A1CB635F100A4F408 /* SelectMenuViewController.h */,
 				1D404E1B1CB635F100A4F408 /* SelectMenuViewController.m */,
+				1D8653751E6585F90065534D /* MainNavigationController.h */,
+				1D8653761E6585F90065534D /* MainNavigationController.m */,
 			);
 			name = Main;
 			sourceTree = "<group>";
@@ -247,6 +252,7 @@
 				1D2B64FF1CB4B0B500ADEDD8 /* AppDelegate.m */,
 				1D87C7C51CBE237F00738E56 /* AppConfig.h */,
 				1D2B65041CB4B0B500ADEDD8 /* Main.storyboard */,
+				1D17BF8D1CBFA6240085F511 /* Main */,
 				1DDF215D1E14D9BD005DEF42 /* GesturePasswordController.h */,
 				1DDF215E1E14D9BD005DEF42 /* GesturePasswordController.m */,
 				8406CDA31CC236070053BF36 /* Cells */,
@@ -294,7 +300,6 @@
 		1D2B65341CB4B7E700ADEDD8 /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
-				1D17BF8D1CBFA6240085F511 /* Main */,
 				1D2B65411CB4BA0400ADEDD8 /* 日记 */,
 				1D2B65421CB4BA1300ADEDD8 /* 随笔 */,
 				1D2B65431CB4BA2200ADEDD8 /* 单词本 */,
@@ -485,6 +490,7 @@
 				TargetAttributes = {
 					1D2B64F71CB4B0B500ADEDD8 = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = 36ATM4WGXF;
 					};
 					1D2B65101CB4B0B500ADEDD8 = {
 						CreatedOnToolsVersion = 7.2;
@@ -611,6 +617,7 @@
 				1D17BF901CBFA66E0085F511 /* WriteEssayViewController.m in Sources */,
 				1D17BF931CBFA6930085F511 /* WriteWordViewController.m in Sources */,
 				1D2B653D1CB4B94C00ADEDD8 /* WordsBookViewController.m in Sources */,
+				1D8653771E6585F90065534D /* MainNavigationController.m in Sources */,
 				1D501FF21D3CB341003BD438 /* WordDetailViewController.m in Sources */,
 				1DF295761D38AA31004E1171 /* DiaryDeatilViewController.m in Sources */,
 				1D2B654B1CB4DFEE00ADEDD8 /* MainViewController.m in Sources */,
@@ -769,10 +776,11 @@
 			baseConfigurationReference = 0F783333F9122CD3898F4C2C /* Pods-Notebook.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 36ATM4WGXF;
 				INFOPLIST_FILE = Notebook/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.psylife.Notebook;
+				PRODUCT_BUNDLE_IDENTIFIER = Kimball.Notebook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -783,10 +791,11 @@
 			baseConfigurationReference = 930378C531AE9DD0098FA9C3 /* Pods-Notebook.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 36ATM4WGXF;
 				INFOPLIST_FILE = Notebook/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.psylife.Notebook;
+				PRODUCT_BUNDLE_IDENTIFIER = Kimball.Notebook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};

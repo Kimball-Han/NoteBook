@@ -24,7 +24,6 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.model = GesturePasswordModelSetting;
     [self configUI];
 }
 
@@ -40,7 +39,7 @@
     CGSize size = [UIScreen mainScreen].bounds.size;
     screenWidth = size.width;
     screenHeight = size.height;
-    width = 80 *screenWidth/375;
+  
     
     
     NSArray *color = @[FlatSkyBlue,FlatMint];
@@ -49,15 +48,44 @@
     if (!_buttonArray) {
         _buttonArray = [[NSMutableArray alloc] initWithCapacity:9];
     }
-    
+    //image
     self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight)];
-    
-    UILabel * alertLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, screenWidth, screenHeight*0.2)];
+    //提示Label
+    UILabel * alertLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 20, screenWidth, screenHeight*0.2-20)];
+    alertLabel.textColor = [UIColor flatWhiteColor];
+    alertLabel.numberOfLines =0;
+    alertLabel.textAlignment  = NSTextAlignmentCenter;
     [self.view addSubview:alertLabel];
     self.alertLabel = alertLabel;
     
+    switch (self.model) {
+        case GesturePasswordModelSetting:
+        {
+            alertLabel.text = @"请输入手势密码！";
+            UIButton *skipButton = [UIButton buttonWithType:UIButtonTypeCustom];
+            skipButton.frame = CGRectMake(screenWidth-100, screenHeight-64, 80, 40);
+            [skipButton setTitle:@"跳过 >>" forState:UIControlStateNormal];
+            [skipButton setTitleColor:[UIColor flatSkyBlueColorDark ] forState:UIControlStateNormal];
+            [self.view addSubview:skipButton];
+        }
+            break;
+        case GesturePasswordModelVerify:
+        {
+            alertLabel.text = @"请输入手势密码！";
+        }
+            break;
+        case GesturePasswordModelReset:
+        {
+            alertLabel.text = @"请输入旧的手势密码！";
+        }
+            break;
+            
+        default:
+            break;
+    }
     
     
+      width = 80 *screenWidth/375;
     CGFloat space =(screenWidth-3*width)/4;
     [self.view addSubview:self.imageView];
     for (int i=0; i<3; i++) {
@@ -123,6 +151,7 @@
     
     
     NSString *password = [self getSelectorArrayPassword];
+    CGFloat delayFloat = 0;
     if (password) {
         if (self.model == GesturePasswordModelSetting) {
             if (self.oldPassword) {
@@ -130,13 +159,16 @@
                     NSLog(@"验证通过");
                 }else{
                     self.oldPassword = nil;
-                    self.alertLabel.text = @"错误，重新输入！";
+                    self.alertLabel.text = @"密码输入错误，重新输入！";
+                    
+                    [self drawLineWithLineColor:[UIColor flatRedColor]];
+                    delayFloat = 0.8;
                 }
                 
             }else{
                 self.oldPassword = password;
-                self.alertLabel.text = @"请再次录入！";
-
+                self.alertLabel.text = @"请再次输入手势密码！";
+                
             }
             
         }else if(self.model == GesturePasswordModelVerify){
@@ -146,11 +178,11 @@
         }else if (self.model == GesturePasswordModelReset){
             
             
-            
         }
     }
-    [self removeLine];
-    
+   
+    [self performSelector:@selector(removeLine) withObject:nil afterDelay:delayFloat];
+
 }
 
 -(NSString *)getSelectorArrayPassword
@@ -159,7 +191,7 @@
     for (UIButton *button in self.selectorArray) {
       string=  [string stringByAppendingString:@(button.tag).stringValue];
     }
-    [self.selectorArray removeAllObjects];
+    
 
     return string;
 }
@@ -208,6 +240,7 @@
     for (UIButton *button in self.buttonArray) {
         button.highlighted = NO;
     }
+    [self.selectorArray removeAllObjects];
 }
 
 

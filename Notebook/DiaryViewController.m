@@ -34,7 +34,8 @@
 }
 -(void)initUI
 {
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64)];
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64-49)];
     [self.view addSubview:self.tableView];
    self.tableView.tableFooterView = [[UIView alloc] init];
   [self.tableView registerClass:[DiaryCell class] forCellReuseIdentifier:@"diaryCell"];

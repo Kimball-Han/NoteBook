@@ -35,8 +35,10 @@
 }
 -(void)initUI
 {
+    self.automaticallyAdjustsScrollViewInsets = NO;
 
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64)];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0,64, SCREEN_WIDTH, SCREEN_HEIGHT-64-49)];
+    self.automaticallyAdjustsScrollViewInsets = NO;
     [self.view addSubview:self.tableView];
     self.tableView.tableFooterView = [[UIView alloc] init];
     [self.tableView registerClass:[EssayCell class] forCellReuseIdentifier:@"essayCell"];
@@ -72,12 +74,15 @@
         self.tableView.emptyDataSetSource = self;
     }
     SearchTableViewController *vc=[[SearchTableViewController alloc] init];
+    
     vc.delegate = self;
     self.searchController = [[UISearchController alloc] initWithSearchResultsController:vc];
     self.searchController.searchResultsUpdater = self;
     self.searchController.dimsBackgroundDuringPresentation =YES;
     [self.searchController.searchBar sizeToFit];
     self.tableView.tableHeaderView =  self.searchController.searchBar;
+    self.searchController.searchBar.searchBarStyle = UISearchBarStyleMinimal;
+    
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     

@@ -25,4 +25,6 @@
 //截图
 +(UIImage *)takeImageFromView:(UIView*)currentView;
 + (UIImage *)snapshot:(UIView *)view;
+
++ (UIImage *)image:(UIImage *)image WithColor:(UIColor *)color;
 @end

@@ -17,5 +17,10 @@
 @property(nonatomic,weak)UILabel *diaryLabel;
 @property(nonatomic,weak)UILabel *essayLabel;
 @property(nonatomic,weak)UILabel *wordLabel;
+
 -(void)getcount;
+
+-(void)startAnimation;
+
+-(void)stopAnimation;
 @end

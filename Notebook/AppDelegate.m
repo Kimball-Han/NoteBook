@@ -7,7 +7,10 @@
 //
 
 #import "AppDelegate.h"
-#import "GesturePasswordController.h"
+#import "MainNavigationController.h"
+#import "MainViewController.h"
+#import <Chameleon.h>
+#import "PublicClass.h"
 @interface AppDelegate ()
 
 @end
@@ -17,13 +20,46 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    self.locationInfo = @"未知";
-    self.weatherInfo = @"未知";
-    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    self.window.rootViewController =[[GesturePasswordController alloc] init];
+    
+    NSArray * array = @[@{
+                            @"title":@"日记",
+                            @"class":@"DiaryViewController"
+                            },
+                        @{
+                            @"title":@"随笔",
+                            @"class":@"EssayViewController"
+                            },
+                        @{
+                            @"title":@"单词本",
+                            @"class":@"WordsBookViewController"
+                            },
+                        @{
+                            @"title":@"我的",
+                            @"class":@"MeViewController"
+                            }];
+    NSMutableArray *VCArrays = [NSMutableArray array];
+    
+    for (NSDictionary *info in array) {
+        UIViewController *vc = [[NSClassFromString(info[@"class"]) alloc]init];
+        
+        NSString *title = info[@"title"];
+        vc.tabBarItem.title = title;
+        
+        vc.tabBarItem.image = [UIImage imageNamed:title] ;
+        vc.tabBarItem.selectedImage = [[PublicClass image:[UIImage imageNamed:title] WithColor:[UIColor flatMintColor]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] ;
+        //    [vc.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName:COLOR_DEEP} forState:UIControlStateNormal];
+        [vc.tabBarItem setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor flatMintColor]} forState:UIControlStateSelected];
+        
+        [VCArrays addObject:vc];
+    }
+    MainViewController *tabvc = [[MainViewController alloc] init];
+    tabvc.viewControllers = VCArrays;
+    MainNavigationController *nav = [[MainNavigationController alloc] initWithRootViewController:tabvc];
+    
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen  mainScreen].bounds];
+    self.window.rootViewController = nav;
     [self.window makeKeyAndVisible];
     
-
     return YES;
 }
 

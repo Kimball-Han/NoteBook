@@ -43,14 +43,12 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-//    _wasKeyboardManagerEnabled = [[IQKeyboardManager sharedManager] isEnabled];
-//    [[IQKeyboardManager sharedManager] setEnable:NO];
+
 }
 
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-//    [[IQKeyboardManager sharedManager] setEnable:_wasKeyboardManagerEnabled];
     
 }
 -(void)initUI
@@ -202,9 +200,8 @@
     inputView.returnKeyType = UIReturnKeyDone;
     self.txtInputView = inputView;
     
-    AppDelegate *app=[UIApplication sharedApplication].delegate;
-    weatherLabel.text = [NSString stringWithFormat:@"天气：%@",app.weatherInfo];
-    [app addObserver:self forKeyPath:@"weatherInfo" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:NULL];
+    weatherLabel.text = @"天气：晴天";
+  
     self.dateDesLabel.text = [PublicClass getTodayStr];
     self.weekDesLabel.text = [PublicClass currentWeekDayStr];
     
@@ -212,22 +209,15 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardFrameWillChange:) name:UIKeyboardWillChangeFrameNotification object:nil];
 }
--(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context
-{
-    if([keyPath isEqualToString:@"weatherInfo"])
-    {
-        AppDelegate *app=[UIApplication sharedApplication].delegate;
-        self.weatherDesLabel.text = app.weatherInfo;
-    }
-}
+
 -(void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UITextFieldTextDidChangeNotification object:nil];
      [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
      [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillChangeFrameNotification object:nil];
-    AppDelegate *app=[UIApplication sharedApplication].delegate;
-    [app removeObserver:self forKeyPath:@"weatherInfo" context:nil];
 }
+
+
 - (void)keyboardWillHide:(NSNotification *)notification{
 //    CGSize size= [UIScreen mainScreen].bounds.size;
     [self.view setNeedsUpdateConstraints];

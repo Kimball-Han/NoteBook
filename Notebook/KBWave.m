@@ -41,7 +41,7 @@
 {
     self.waveSpeed = 0.5;
     self.waveCurvature = 1.5;
-    self.waveHeight = 4;
+    self.waveHeight = 4.0;
     self.realWaveColor = [UIColor whiteColor];
     self.maskWaveColor = [[UIColor whiteColor] colorWithAlphaComponent:0.4];
     
@@ -98,11 +98,13 @@
 
 -(void)stopWaveAnimation
 {
+    self.timer.paused = YES;
     [self.timer invalidate];
     self.timer = nil;
 }
 
 -(void)wave{
+    
     self.offset += self.waveSpeed;
     CGFloat width = CGRectGetWidth(self.frame);
     CGFloat height = self.waveHeight;
@@ -125,10 +127,13 @@
         CGPathAddLineToPoint(maskPath, NULL, x, maskY);
     }
     
-    CGFloat centX = self.bounds.size.width/2;
-    CGFloat centY = height *sinf(0.01 *self.waveCurvature *centX + self.offset *0.045);
+    CGFloat w = self.bounds.size.width/3;
+    CGFloat Y1 = height *sinf(0.01 *self.waveCurvature *w*0.5 + self.offset *0.045);
+    CGFloat Y2 = height *sinf(0.01 *self.waveCurvature *w*1.5 + self.offset *0.045);
+    CGFloat Y3 = height *sinf(0.01 *self.waveCurvature *w*2.5 + self.offset *0.045);
+
     if (self.waveBlock) {
-        self.waveBlock(centY);
+        self.waveBlock(Y1,Y2,Y3);
     }
     
     

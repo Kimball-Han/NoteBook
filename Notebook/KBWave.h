@@ -10,7 +10,7 @@
 #define KBColor(r,g,b,a) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:(a)]
 
 
-typedef void(^KBWaveBlock)(CGFloat currentY);
+typedef void(^KBWaveBlock)(CGFloat y1,CGFloat y2,CGFloat y3);
 @interface KBWave : UIView
 
 @property(nonatomic,assign)CGFloat waveCurvature;
