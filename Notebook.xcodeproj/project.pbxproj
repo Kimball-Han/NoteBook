@@ -193,14 +193,14 @@
 		1D17BF8D1CBFA6240085F511 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				1D8653751E6585F90065534D /* MainNavigationController.h */,
+				1D8653761E6585F90065534D /* MainNavigationController.m */,
 				1D2B65491CB4DFEE00ADEDD8 /* MainViewController.h */,
 				1D2B654A1CB4DFEE00ADEDD8 /* MainViewController.m */,
 				1D2B654C1CB4F2C500ADEDD8 /* CustomTabBar.h */,
 				1D2B654D1CB4F2C500ADEDD8 /* CustomTabBar.m */,
 				1D404E1A1CB635F100A4F408 /* SelectMenuViewController.h */,
 				1D404E1B1CB635F100A4F408 /* SelectMenuViewController.m */,
-				1D8653751E6585F90065534D /* MainNavigationController.h */,
-				1D8653761E6585F90065534D /* MainNavigationController.m */,
 			);
 			name = Main;
 			sourceTree = "<group>";

@@ -9,6 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface MainNavigationController : UINavigationController
-@property(nonatomic,copy)NSString *locationInfo;
 
 @end

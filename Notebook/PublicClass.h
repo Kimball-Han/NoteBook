@@ -26,5 +26,8 @@
 +(UIImage *)takeImageFromView:(UIView*)currentView;
 + (UIImage *)snapshot:(UIView *)view;
 
++(UIImage *)coreBlurImage:(UIImage *)image withBlurNumber:(CGFloat)blur;
+
+
 + (UIImage *)image:(UIImage *)image WithColor:(UIColor *)color;
 @end

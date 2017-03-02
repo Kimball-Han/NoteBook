@@ -160,17 +160,14 @@
     label.layer.masksToBounds = YES;
     label.numberOfLines =0;
     label.textAlignment = NSTextAlignmentCenter;
-    label.font = [UIFont systemFontOfSize:20];
+    label.font = [UIFont systemFontOfSize:19];
     [self addSubview:label];
     return label;
 }
 -(void)initUI{
-    element = 70;
+    element = 70;//元素
     
-    CGFloat upHeight = self.frame.size.height-20;
-    
-    
-   
+    CGFloat upHeight = self.frame.size.height-10;
     
     KBWave *upview = [[KBWave alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width, upHeight)];
     NSArray *color = @[FlatSkyBlue,FlatMint];
@@ -197,6 +194,9 @@
         [self.layer addSublayer:layer];
 
     }
+    UIImageView *moon = [[UIImageView alloc] initWithImage:[PublicClass image:[UIImage imageNamed:@"moon_star"] WithColor:[UIColor flatWhiteColor]]];
+    moon.frame = CGRectMake(w-30, 30, 15, 15);
+    [self addSubview:moon];
 }
 
 -(NSAttributedString *)getAttributedStringWithString:(NSString *)string lineSpace:(CGFloat)lineSpace {

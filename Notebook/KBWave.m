@@ -54,7 +54,7 @@
     if (!_realWaveLayer) {
         _realWaveLayer = [CAShapeLayer layer];
         CGRect frame = [self bounds];
-        frame.origin.y = frame.size.height - self.waveHeight;
+        frame.origin.y = frame.size.height - self.waveHeight+1;
         frame.size.height = self.waveHeight;
         _realWaveLayer.frame = frame;
         _realWaveLayer.fillColor = self.realWaveColor.CGColor;
@@ -67,7 +67,7 @@
     if (!_maskWaveLayer) {
         _maskWaveLayer = [CAShapeLayer layer];
         CGRect frame = [self bounds];
-        frame.origin.y = frame.size.height - self.waveHeight;
+        frame.origin.y = frame.size.height - self.waveHeight+1;
         frame.size.height = self.waveHeight;
         _maskWaveLayer.frame = frame;
         _maskWaveLayer.fillColor = self.maskWaveColor.CGColor;

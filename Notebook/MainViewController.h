@@ -8,5 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSInteger,OperationModel) {
+    OperationModelPresentWriteDiary = 10,
+    OperationModelPresentWriteEssay,
+    OperationModelPresentWriteWorld
+};
 @interface MainViewController : UITabBarController
+
+
+-(void)OperationModel:(OperationModel )model;
+
 @end

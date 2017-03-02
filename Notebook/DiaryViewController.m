@@ -16,6 +16,7 @@
 #import "Cells.h"
 #import "DiaryDeatilViewController.h"
 #import "CalendarViewController.h"
+#import "MainViewController.h"
 @interface DiaryViewController ()<DZNEmptyDataSetDelegate,DZNEmptyDataSetSource>
 @property (strong, nonatomic)  UITableView *tableView;
 @property(nonatomic,assign)NSInteger page;
@@ -178,8 +179,7 @@
 }
 - (void)emptyDataSetDidTapButton:(UIScrollView *)scrollView{
     
-    WriteViewController *vc=[[WriteViewController alloc] init];
-    [self.tabBarController presentViewController:vc animated:YES completion:nil];
+    [(MainViewController *)self.tabBarController OperationModel:OperationModelPresentWriteDiary];
 }
 
 - (void)didReceiveMemoryWarning {

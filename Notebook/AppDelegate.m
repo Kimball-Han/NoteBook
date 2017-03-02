@@ -54,6 +54,8 @@
     }
     MainViewController *tabvc = [[MainViewController alloc] init];
     tabvc.viewControllers = VCArrays;
+    
+    
     MainNavigationController *nav = [[MainNavigationController alloc] initWithRootViewController:tabvc];
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen  mainScreen].bounds];

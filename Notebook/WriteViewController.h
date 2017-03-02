@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface WriteViewController : UIViewController
-
+@property(nonatomic,copy)NSString *loactionCity;
 @end

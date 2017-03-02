@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "head.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "moon_star.png",
       "scale" : "2x"
     },
     {

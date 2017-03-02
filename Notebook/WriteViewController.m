@@ -13,7 +13,7 @@
 #import "FMDBManager.h"
 #import <SVProgressHUD.h>
 #import "AppDelegate.h"
-
+#import "MainNavigationController.h"
 @interface WriteViewController ()<UITextViewDelegate>
 @property (weak, nonatomic)  UILabel *numberOfWordLabel;
 
@@ -290,8 +290,7 @@
             model.timestr = [PublicClass getTimeStr];
             model.content = self.txtInputView.text;
             model.wordnumber = self.numberOfWordLabel.text;
-            AppDelegate *app = [UIApplication sharedApplication].delegate;
-            model.location = app.locationInfo;
+            model.location = self.loactionCity;
            BOOL ret= [[FMDBManager manager] insertModel:model];
             
             
