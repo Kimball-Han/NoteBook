@@ -17,7 +17,7 @@
 #import "DiaryDeatilViewController.h"
 #import "CalendarViewController.h"
 #import "MainViewController.h"
-@interface DiaryViewController ()<DZNEmptyDataSetDelegate,DZNEmptyDataSetSource>
+@interface DiaryViewController ()<DZNEmptyDataSetDelegate,DZNEmptyDataSetSource,UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic)  UITableView *tableView;
 @property(nonatomic,assign)NSInteger page;
 @property(nonatomic,strong)NSMutableArray *diaryArray;
@@ -35,6 +35,9 @@
 }
 -(void)initUI
 {
+//    self.edgesForExtendedLayout = UIRectEdgeNone;
+   
+
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64-49)];
     [self.view addSubview:self.tableView];
@@ -47,9 +50,8 @@
         weakSelf.page = 0;
         dispatch_async(dispatch_get_global_queue(0, 0), ^{
             [weakSelf getDiary];
-
         });
-
+        
     }];
   self.isUpdate =NO;
   [self.tableView.mj_header beginRefreshing];
@@ -64,6 +66,9 @@
     }];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willUpdateDiary) name:@"updateDiary" object:nil];
+    
+    self.tableView.delegate = self;
+    self.tableView.dataSource= self;
     if (!self.tableView.emptyDataSetDelegate) {
         self.tableView.emptyDataSetDelegate = self;
         self.tableView.emptyDataSetSource = self;

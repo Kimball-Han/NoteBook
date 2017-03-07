@@ -170,8 +170,9 @@
     CGFloat upHeight = self.frame.size.height-10;
     
     KBWave *upview = [[KBWave alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width, upHeight)];
-    NSArray *color = @[FlatSkyBlue,FlatMint];
-    upview.backgroundColor = GradientColor(UIGradientStyleTopToBottom, upview.frame, color);
+    NSArray *color = @[HexColor(@"#4568DC"),HexColor(@"#43cea2")];
+    UIColor *gcolor= GradientColor(UIGradientStyleTopToBottom, upview.frame, color);
+    upview.backgroundColor = gcolor;
     [self addSubview:upview];
     
     CGFloat w =self.frame.size.width/3.0;

@@ -155,55 +155,54 @@
 -(void)configUI{
     [self setSelectionStyle:UITableViewCellSelectionStyleNone];
     UILabel *itemLabel = [[UILabel alloc] init];
-    UILabel *contentLabel =[[UILabel alloc] init];
-    UILabel *datelabel = [[UILabel alloc] init];
-    UILabel *numberLabel = [[UILabel alloc] init];
-    
-    [self addSubview:itemLabel];
-    [self addSubview:contentLabel];
-    [self addSubview:datelabel];
-    [self addSubview:numberLabel];
-    
+    [self.contentView addSubview:itemLabel];
+    itemLabel.font = [PublicClass fangsongAndSize:20];
+    itemLabel.numberOfLines =0;
     self.itemLabel = itemLabel;
+
+    
+    UILabel *desLabel = [[UILabel alloc] init];
+    [self.contentView addSubview:desLabel];
+    desLabel.font = [PublicClass fangsongAndSize:13];
+    desLabel.textColor = [UIColor lightGrayColor];
+    self.deslabel = desLabel;
+    
+    UILabel *contentLabel =[[UILabel alloc] init];
+    [self.contentView addSubview:contentLabel];
+    contentLabel.font = [PublicClass fangsongAndSize:18];
+    contentLabel.numberOfLines =2;
     self.contentLabel = contentLabel;
-    self.datelabel = datelabel;
-    self.numberLabel = numberLabel;
-    self.itemLabel.font = [PublicClass fangsongAndSize:22];
-    self.contentLabel.font=[PublicClass fangsongAndSize:16];
-    self.datelabel.font = [PublicClass fangsongAndSize:13];
-    self.numberLabel.font = [PublicClass fangsongAndSize:13];
-    self.datelabel.textColor = [UIColor lightGrayColor];
-    self.numberLabel.textColor = [UIColor lightGrayColor];
+
+
+
     
-    self.contentLabel.numberOfLines =2;
-    
-    self.numberLabel.textAlignment = NSTextAlignmentRight;
-    self.datelabel.textAlignment = NSTextAlignmentRight;
-    
-    [self.itemLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.mas_left).with.offset(15);
-        make.top.equalTo(self.mas_top).with.offset(8);
-        make.right.equalTo(self.mas_right).with.offset(-15);
-        make.height.mas_equalTo(30);
+    [itemLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.contentView.mas_left).with.offset(15);
+        make.top.equalTo(self.contentView.mas_top).with.offset(8);
+        make.right.equalTo(self.contentView.mas_right).with.offset(0);
     }];
     
-    [self.datelabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.height.equalTo(self.numberLabel);
-        make.width.equalTo(self.numberLabel);
-        make.centerX.equalTo(self.numberLabel);
-        make.right.equalTo(self.mas_right).with.offset(-8);
-        make.width.mas_equalTo(95);
-        make.bottom.equalTo(self.mas_bottom).with.offset(-8);
+    [desLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(itemLabel.mas_bottom).with.offset(4);
+        make.left.equalTo(self.contentView.mas_left).with.offset(15);
+        make.right.equalTo(self.contentView.mas_right).with.offset(-8);
+        make.height.mas_equalTo(@15);
+//        make.bottom.equalTo(self.contentView.mas_bottom).with.offset(-8);
     }];
-    [self.numberLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.itemLabel.mas_bottom).with.offset(8);
+    
+    [contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(desLabel.mas_bottom).with.offset(4);
+        make.left.equalTo(self.contentView.mas_left).with.offset(15);
+        make.right.equalTo(self.contentView.mas_right).offset(0);
+        make.bottom.equalTo(self.contentView.mas_bottom).offset(-8);
+        
     }];
-    [self.contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.mas_left).with.offset(15);
-        make.top.equalTo(self.itemLabel.mas_bottom).with.offset(4);
-        make.bottom.equalTo(self.mas_bottom).with.offset(-4);
-        make.right.equalTo(self.datelabel.mas_left).offset(-4);
-    }];
+    
+  
+    
+    
+  
+   
 }
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -214,8 +213,7 @@
     _model=model;
     self.itemLabel.text = [NSString stringWithFormat:@"%@",model.title];
     self.contentLabel.text = [NSString stringWithFormat:@"%@",model.content];
-    self.datelabel.text = model.datetime;
-    self.numberLabel.text = model.wordnumber;
+    self.deslabel.text = [NSString stringWithFormat:@"%@    字数：%@",model.datetime,model.wordnumber];
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

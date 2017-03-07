@@ -28,6 +28,10 @@
 
 +(UIImage *)coreBlurImage:(UIImage *)image withBlurNumber:(CGFloat)blur;
 
-
+//改变图片颜色，适合单色图片
 + (UIImage *)image:(UIImage *)image WithColor:(UIColor *)color;
+
+//计算字符串size
++(CGSize)sizeWithString:(NSString *)string font:(UIFont *)font size:(CGSize)size;
+
 @end

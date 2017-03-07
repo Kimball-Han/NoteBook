@@ -36,13 +36,15 @@
 -(void)initUI
 {
     self.automaticallyAdjustsScrollViewInsets = NO;
+   
 
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0,64, SCREEN_WIDTH, SCREEN_HEIGHT-64-49)];
     self.automaticallyAdjustsScrollViewInsets = NO;
     [self.view addSubview:self.tableView];
     self.tableView.tableFooterView = [[UIView alloc] init];
     [self.tableView registerClass:[EssayCell class] forCellReuseIdentifier:@"essayCell"];
-    
+    self.tableView.estimatedRowHeight = 100;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -82,9 +84,6 @@
     [self.searchController.searchBar sizeToFit];
     self.tableView.tableHeaderView =  self.searchController.searchBar;
     self.searchController.searchBar.searchBarStyle = UISearchBarStyleMinimal;
-    
-    
-    self.automaticallyAdjustsScrollViewInsets = NO;
     
     
 }
@@ -142,10 +141,10 @@
 {
     return YES;
 }
--(CGFloat )tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 80;
-}
+//-(CGFloat )tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    return UITableViewAutomaticDimension;
+//}
 - (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return @"删除";

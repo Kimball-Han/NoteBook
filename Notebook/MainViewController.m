@@ -32,17 +32,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initUI];
-    self.locationInfo = @"未知";
+    self.locationInfo = @"地点：未知";
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
 
+}
 
 -(void)initUI
 {
+//    self.edgesForExtendedLayout = UIRectEdgeNone;
+
 
     //自定义tabBar
     CustomTabBar *tabBar = [[CustomTabBar alloc] init];
-    [tabBar.addButton addTarget:self action:@selector(addButtonClick) forControlEvents:UIControlEventTouchUpInside];
+    [tabBar.addButton addTarget:self action:@selector(addButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     [self setValue:tabBar forKey:@"tabBar"];
 
     self.automaticallyAdjustsScrollViewInsets = NO;
@@ -55,20 +61,21 @@
 
 
 
--(void)addButtonClick
+-(void)addButtonClick:(UIButton *)sender
 {
 
     SelectMenuViewController *destinationVc=  [[SelectMenuViewController alloc] init];
     destinationVc.delegate=self;
     //设置模式展示风格
 //    [destinationVc setModalPresentationStyle:UIModalPresentationOverCurrentContext];
-    destinationVc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+//    destinationVc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
 
     //必要配置
 //    self.navigationController.modalPresentationStyle = UIModalPresentationCurrentContext;
 //    self.navigationController.providesPresentationContextTransitionStyle = YES;
 //    self.navigationController.definesPresentationContext = YES;
-    [self.navigationController presentViewController:destinationVc animated:YES completion:nil];
+    [self.navigationController pushViewController:destinationVc animated:NO];
+    
 
 }
 
@@ -90,7 +97,7 @@
             WriteViewController *vc=[[WriteViewController alloc] init];
             vc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
             vc.loactionCity = self.locationInfo;
-            [self.navigationController presentViewController:vc animated:YES completion:nil];
+            [self.navigationController presentViewController:vc animated:NO completion:nil];
             
         }
             break;
@@ -98,14 +105,14 @@
         {
             WriteEssayViewController *vc = [[WriteEssayViewController alloc] init];
             vc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-            [self.navigationController presentViewController:vc animated:YES completion:nil];
+            [self.navigationController presentViewController:vc animated:NO completion:nil];
         }
             break;
         case OperationModelPresentWriteWorld:
         {
             WriteWordViewController *vc = [[WriteWordViewController alloc] init];
             vc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-            [self.navigationController presentViewController:vc animated:YES completion:nil];
+            [self.navigationController presentViewController:vc animated:NO completion:nil];
         }
             break;
             

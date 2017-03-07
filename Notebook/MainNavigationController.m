@@ -22,11 +22,12 @@
     
     self.navigationBar.barTintColor = [UIColor flatMintColor];
     self.navigationBar.tintColor = [UIColor whiteColor];
-    
+//
     self.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName :[UIColor whiteColor]};
 //    [self.navigationBar setTranslucent:NO];
 //    self.navigationBar.opaque = NO;
 //    self.automaticallyAdjustsScrollViewInsets = NO;
+//    self.edgesForExtendedLayout = UIRectEdgeNone;
   
 
 }

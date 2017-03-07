@@ -13,8 +13,8 @@
 @interface DiaryDeatilViewController ()
 @property(nonatomic,strong)UIScrollView *scrollView;
 @property(nonatomic,strong)UILabel *dayLabel;
-@property(nonatomic,strong)UILabel *weekLabel;
 @property(nonatomic,strong)UILabel *weatherLabel;
+@property(nonatomic,strong)UILabel *locationLabel;
 @property(nonatomic,strong)UILabel *contentLabel;
 @end
 
@@ -33,53 +33,64 @@
     
    self.scrollView = [[UIScrollView alloc] init];
     [self.view addSubview:self.scrollView];
-//    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:73/255.0 green:187/255.0 blue:199/255.0 alpha:1.0];
-//    [self.navigationItem.backBarButtonItem ti];
-
-    
-    self.dayLabel = [[UILabel alloc] init];
     self.dayLabel.text = self.model.datetime;
+
+    UIColor *grayColor = [UIColor grayColor];
+    //周星期几
+    self.title = self.model.datetime;
+    self.dayLabel = [[UILabel alloc] init];
+    self.dayLabel.text = self.model.weekday;
     [self.scrollView addSubview:self.dayLabel];
-    self.dayLabel.font = [PublicClass fangsongAndSize:20];
-    self.weekLabel = [[UILabel alloc] init];
-    self.weekLabel.text = self.model.weekday;
-    self.weekLabel.font = [PublicClass fangsongAndSize:20];
-    self.weekLabel.textAlignment = NSTextAlignmentCenter;
-    [self.scrollView addSubview:self.weekLabel];
-    self.weatherLabel.font=[PublicClass fangsongAndSize:20];
+    self.dayLabel.font = [PublicClass fangsongAndSize:18];
+    self.dayLabel.textColor = grayColor;
+   //天气
     self.weatherLabel = [[UILabel alloc] init];
     self.weatherLabel.text = self.model.weather;
-    self.weatherLabel.textAlignment = NSTextAlignmentRight;
-    self.weatherLabel.font = [PublicClass fangsongAndSize:20];
+    self.weatherLabel.font = [PublicClass fangsongAndSize:18];
+//    self.weatherLabel.textAlignment = NSTextAlignmentCenter;
     [self.scrollView addSubview:self.weatherLabel];
+    self.weatherLabel.textColor = grayColor;
+    //位置
+    self.locationLabel.font=[PublicClass fangsongAndSize:18];
+    self.locationLabel = [[UILabel alloc] init];
+    self.locationLabel.text = self.model.location;
+    self.locationLabel.textAlignment = NSTextAlignmentRight;
+    self.locationLabel.font = [PublicClass fangsongAndSize:18];
+    [self.scrollView addSubview:self.locationLabel];
+    self.locationLabel.textColor = grayColor;
+    
     [self.dayLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.height.equalTo(@[self.weatherLabel,self.weekLabel]);
-        make.top.equalTo(@[self.weatherLabel,self.weekLabel]);
+        make.height.equalTo(@[self.locationLabel,self.weatherLabel]);
+        make.top.equalTo(@[self.locationLabel,self.weatherLabel]);
         make.top.equalTo(self.scrollView).with.offset(8);
         make.left.equalTo(self.scrollView.mas_left).with.offset(8);
         make.height.mas_equalTo([PublicClass fangsongAndSize:20].lineHeight);
-        make.width.mas_equalTo(150);
+        make.width.mas_equalTo(80);
     }];
-    [self.weatherLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    
+    [self.locationLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.view.mas_right).with.offset(-8);
         make.width.mas_equalTo(100);
     }];
-    [self.weekLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.weatherLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.dayLabel.mas_right).with.offset(0);
-        make.right.equalTo(self.weatherLabel.mas_left).with.offset(0);
+        make.right.equalTo(self.locationLabel.mas_left).with.offset(0);
       
     }];
+    
+    
     self.contentLabel = [[UILabel alloc] init];
     [self.scrollView addSubview:self.contentLabel];
-    self.contentLabel.text = [NSString stringWithFormat:@"    %@",_model.content];
+    self.contentLabel.text = self.model.content;
     self.contentLabel.numberOfLines =0;
-    self.contentLabel.font= [PublicClass fangsongAndSize:17];
-    CGSize size=[self sizeWithString:self.contentLabel.text font:self.contentLabel.font];
+    self.contentLabel.font= [PublicClass fangsongAndSize:18];
+    
+    //计算内容大小
     [self.contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.dayLabel.mas_bottom).with.offset(8);
+        make.top.equalTo(self.dayLabel.mas_bottom).with.offset(16);
         make.left.equalTo(self.scrollView.mas_left).with.offset(8);
-        make.right.equalTo(self.view.mas_right).with.offset(-8);
-        make.height.equalTo(@(size.height));
+        make.right.equalTo(self.view.mas_right).with.offset(0);
+//        make.height.equalTo(@(size.height));
     }];
     UIEdgeInsets padding = UIEdgeInsetsMake(0, 0, 0, 0);
     [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -94,14 +105,7 @@
 }
 
 
--(CGSize)sizeWithString:(NSString *)string font:(UIFont *)font
-{
-    CGRect rect = [string boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 16, 8000)//限制最大的宽度和高度
-                                       options:NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesFontLeading  |NSStringDrawingUsesLineFragmentOrigin// 采用换行模式
-                                    attributes:@{NSFontAttributeName: font}//传人的字体字典
-                                       context:nil];
-    return rect.size;
-}
+
 
 
 - (void)didReceiveMemoryWarning {

@@ -23,23 +23,31 @@
     [super viewDidLoad];
     
 
+    UIImageView *bg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bgcover9"]];
+    bg.frame =self.view.bounds;
+    [self.view addSubview:bg];
+    
+    UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+    UIVisualEffectView *effectview = [[UIVisualEffectView alloc] initWithEffect:blur];
+    effectview.frame = self.view.bounds;
+    [self.view addSubview:effectview];
+    
+    
     UILabel *dateLabel = [[UILabel alloc] initWithFrame:CGRectMake(15,84, SCREEN_WIDTH, 40)];
     dateLabel.font = [PublicClass fangsongAndSize:20];
     [self.view addSubview:dateLabel];
     dateLabel.text = [PublicClass getTodayStr] ;
+    dateLabel.textColor = [UIColor whiteColor];
 
     UILabel *dateLabel2 = [[UILabel alloc] initWithFrame:CGRectMake(15,124, SCREEN_WIDTH,40 )];
     dateLabel2.font = [PublicClass fangsongAndSize:20];
     [self.view addSubview:dateLabel2];
-    
-   ;
     dateLabel2.text = [PublicClass currentWeekDayStr] ;
-    self.view.backgroundColor = FlatWhite;
-    self.writeDiaryView =[self createButtonWithImageName:@"diaryss" andTitle:@"日记" andTag:10];
-    self.writeEssayView =[self createButtonWithImageName:@"essayss" andTitle:@"随笔" andTag:11];;
-  
+    dateLabel2.textColor = [UIColor whiteColor];
 
-    self.writeWordView =[self createButtonWithImageName:@"wordss" andTitle:@"单词" andTag:12];;
+    self.writeDiaryView =[self createButtonWithImageName:@"diaryss" andTitle:@"日记" andTag:10];
+    self.writeEssayView =[self createButtonWithImageName:@"essayss" andTitle:@"随笔" andTag:11];
+    self.writeWordView =[self createButtonWithImageName:@"wordss" andTitle:@"单词" andTag:12];
     
     CGFloat width = self.view.frame.size.width/3.0;
     for (int i=0; i<3; i++) {
@@ -54,6 +62,8 @@
 {
     [super viewWillAppear:animated];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+    self.navigationController.navigationBarHidden = YES;
+
     [UIView animateWithDuration:0.7 animations:^{
         CGFloat width = self.view.frame.size.width/3.0;
         for (int i=0; i<3; i++) {
@@ -61,13 +71,18 @@
             button.center = CGPointMake((i+0.5)*width, self.view.frame.size.height*0.6+60);
         }
     } completion:^(BOOL finished) {
-        UIImageView *close = [[UIImageView alloc] initWithImage:[PublicClass image:[UIImage imageNamed:@"close"] WithColor:FlatWatermelon]];
-        close.frame = CGRectMake(0, 0, 50 ,50);
-        close.center = CGPointMake(SCREEN_WIDTH/2, SCREEN_HEIGHT-40);
-        [self.view addSubview:close];
+       
     }];
     
 }
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    self.navigationController.navigationBarHidden = NO;
+
+}
+
+
 -(UIButton *)createButtonWithImageName:(NSString *)img  andTitle:(NSString *)title andTag:(NSInteger)tag{
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -87,6 +102,7 @@
     label.font = [PublicClass fangsongAndSize:18];
     label.textAlignment = NSTextAlignmentCenter;
     label.text = title;
+    label.textColor = [UIColor whiteColor];
     
     
     
@@ -109,18 +125,20 @@
 {
 
   
-        [self dismissViewControllerAnimated:NO completion:^(){
+    
             if([self.delegate respondsToSelector:@selector(SelectMenuView:)]){
                 [self.delegate SelectMenuView:sender.tag];
             }
-        }];
-        
+
+    [self.navigationController popViewControllerAnimated:NO];
+    
     
 }
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-    [self dismissViewControllerAnimated:NO completion:nil];
+    [self.navigationController popViewControllerAnimated:NO] ;
+
 
 }
 //-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

@@ -29,9 +29,8 @@
 @interface EssayCell : UITableViewCell
 @property (weak, nonatomic)  UILabel *itemLabel;
 @property (weak, nonatomic)  UILabel *contentLabel;
-@property (weak, nonatomic)  UILabel *datelabel;
-@property (weak, nonatomic)  UILabel *weakdayLabel;
-@property (weak, nonatomic)  UILabel *numberLabel;
+@property (weak, nonatomic)  UILabel *deslabel;
+
 
 @property(nonatomic,strong) EssayModel *model;
 @end

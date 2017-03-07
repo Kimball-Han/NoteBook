@@ -208,4 +208,12 @@
     UIGraphicsEndImageContext();
     return newImage;
 }
++(CGSize)sizeWithString:(NSString *)string font:(UIFont *)font size:(CGSize)size
+{
+    CGRect rect = [string boundingRectWithSize:size//限制最大的宽度和高度
+                                       options:NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesFontLeading  |NSStringDrawingUsesLineFragmentOrigin// 采用换行模式
+                                    attributes:@{NSFontAttributeName: font}//传人的字体字典
+                                       context:nil];
+    return rect.size;
+}
 @end

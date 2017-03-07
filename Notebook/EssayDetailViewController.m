@@ -10,7 +10,10 @@
 #import "PublicClass.h"
 #import <Masonry.h>
 @interface EssayDetailViewController ()
-@property(nonatomic,strong)UITextView *textView;
+//@property(nonatomic,strong)UILabel *contentLabel;
+//@property(nonatomic,strong)UILabel *titleLabel;
+//@property(nonatomic,strong)UILabel *describeLabel;
+
 @end
 
 @implementation EssayDetailViewController
@@ -20,35 +23,70 @@
     [self initUI];
 }
 
-//-(void)viewWillAppear:(BOOL)animated
-//{
-//    [super viewWillAppear:animated];
-//    self.navigationController.navigationBarHidden =NO;
-//}
+
 
 
 -(void)initUI{
-    self.textView = [[UITextView alloc] init];
-    [self.view addSubview:self.textView];
- 
+    self.title = self.model.title;
     
-    NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@\n\n",self.model.title]];
-    [attributeString addAttribute:NSFontAttributeName value:[PublicClass fangsongAndSize:20] range:NSMakeRange(0, attributeString.length)];
-    NSMutableAttributedString *content = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"    %@",self.model.content]];
-    [content addAttribute:NSFontAttributeName value:[PublicClass fangsongAndSize:16] range:NSMakeRange(0, content.length)];
-    [attributeString appendAttributedString:content];
+    UIScrollView *scrollview = [[UIScrollView alloc] init];
+    [self.view addSubview:scrollview];
     
-    self.textView.attributedText = attributeString;
-    self.textView.editable = NO;
-    [self.textView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view).with.insets(UIEdgeInsetsMake(8, 8, 8, 8));
+    //title
+    UILabel *titleLabel = [[UILabel alloc] init];
+    titleLabel.numberOfLines =0;
+    titleLabel.font = [UIFont systemFontOfSize:20];
+    titleLabel.text = self.model.title;
+    [scrollview addSubview:titleLabel];
+    [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(scrollview.mas_top).with.offset(8);
+        make.left.equalTo(scrollview.mas_left).with.offset(8);
+        make.right.equalTo(self.view.mas_right).with.offset(-8);
     }];
+    
+    //描述
+    UILabel *describeLabel = [[UILabel alloc] init];
+    describeLabel.text = [NSString stringWithFormat:@"%@    字数：%@",self.model.datetime,self.model.wordnumber];
+    describeLabel.textColor = [UIColor grayColor];
+    describeLabel.font = [PublicClass fangsongAndSize:13];
+    [scrollview addSubview:describeLabel];
+    [describeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(titleLabel.mas_bottom).with.offset(8);
+        make.left.equalTo(scrollview.mas_left).with.offset(8);
+        make.right.equalTo(self.view.mas_right).with.offset(-8);
+        make.height.mas_equalTo(@25);
+    }];
+    //内容
+    UILabel *contentLabel = [[UILabel alloc] init];
+    contentLabel.numberOfLines = 0;
+    contentLabel.font = [PublicClass fangsongAndSize:18];
+    [scrollview addSubview:contentLabel];
+    contentLabel.text = self.model.content;
+    [contentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(describeLabel.mas_bottom).with.offset(8);
+        make.left.equalTo(scrollview.mas_left).with.offset(8);
+        make.right.equalTo(self.view.mas_right).with.offset(0);
+        
+    }];
+    
+    [scrollview mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view).with.insets(UIEdgeInsetsZero);
+        make.bottom.equalTo(contentLabel.mas_bottom).with.offset(0);
+
+    }];
+    
+    
+    
+    //     make.edges.equalTo(self.view).with.insets(UIEdgeInsetsMake(8, 8, 8, 0));
+    
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    
+    
+    
     UIBarButtonItem *right = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(rightButtonClick:)];
     self.navigationItem.rightBarButtonItem =right;
     
-//    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:73/255.0 green:187/255.0 blue:199/255.0 alpha:1.0];
-   
     
 }
 -(void)rightButtonClick:(UIBarButtonItem *)sender;
@@ -61,13 +99,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

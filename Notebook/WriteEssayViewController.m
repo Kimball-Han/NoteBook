@@ -171,7 +171,7 @@
         make.top.equalTo(self.itemTextView.mas_bottom).with.offset(4);
         make.left.equalTo(scrollView.mas_left).with.offset(8);
         make.right.equalTo(self.view.mas_right).with.offset(-8);
-        make.height.mas_equalTo(@0.5);
+        make.height.mas_equalTo(@1);
     }];
     
     [self.contentTextView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -200,6 +200,29 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillChangeframe:) name:UIKeyboardWillChangeFrameNotification object:nil];
     
+}
+
+- (void)drawDashLine:(UIView *)lineView lineLength:(int)lineLength lineSpacing:(int)lineSpacing lineColor:(UIColor *)lineColor
+{
+    CAShapeLayer *shapeLayer = [CAShapeLayer layer];
+    [shapeLayer setBounds:lineView.bounds];
+    [shapeLayer setPosition:CGPointMake(CGRectGetWidth(lineView.frame) / 2, CGRectGetHeight(lineView.frame))];
+    [shapeLayer setFillColor:[UIColor clearColor].CGColor];
+    //  设置虚线颜色为blackColor
+    [shapeLayer setStrokeColor:lineColor.CGColor];
+    //  设置虚线宽度
+    [shapeLayer setLineWidth:CGRectGetHeight(lineView.frame)];
+    [shapeLayer setLineJoin:kCALineJoinRound];
+    //  设置线宽，线间距
+    [shapeLayer setLineDashPattern:[NSArray arrayWithObjects:[NSNumber numberWithInt:lineLength], [NSNumber numberWithInt:lineSpacing], nil]];
+    //  设置路径
+    CGMutablePathRef path = CGPathCreateMutable();
+    CGPathMoveToPoint(path, NULL, 0, 0);
+    CGPathAddLineToPoint(path, NULL,CGRectGetWidth(lineView.frame), 0);
+    [shapeLayer setPath:path];
+    CGPathRelease(path);
+    //  把绘制好的虚线添加上来
+    [lineView.layer addSublayer:shapeLayer];
 }
 
 -(void)keyBoardWillHide:(NSNotification *)notification

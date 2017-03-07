@@ -130,6 +130,7 @@
         [model setValue:@([result intForColumn:@"id"]) forKey:@"ids"];
         [model setValuesForKeysWithDictionary:result.resultDictionary];
         [dataArray addObject:model];
+        
     }
     
     return dataArray;
